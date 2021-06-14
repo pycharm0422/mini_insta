@@ -1,0 +1,32 @@
+
+<h1>Messaging Page</h1>
+<br><br><br><br><br><br><br><br><br><br>
+
+<div id="thisdiv">
+
+    {% for message in messages %}
+    {% if message.sender == request.user %}
+        <b>you</b> <br>
+        {{message.message}} <br><br>
+    {% else %}
+        <b>{{message.sender}}</b> <br>
+        {{message.message}} <br><br>
+    {% endif %}
+    {% endfor %}
+
+</div>
+
+<br><br><br><br><br>
+
+
+
+<form action="" method="post">
+    {% csrf_token %}
+    <fieldset>
+        <textarea name="message" id="" cols="30" rows="10"></textarea>
+    </fieldset>
+    <button type="submit" name="reload" >Message</button>
+</form>
+
+
+

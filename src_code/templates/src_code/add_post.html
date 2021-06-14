@@ -1,0 +1,14 @@
+<h1>Add Post</h1><br>
+
+
+<form action="" method="post">
+    {% csrf_token %}
+    <fieldset>
+        {{form.as_p}}
+    </fieldset>
+    <button type="submit" >Post</button>
+</form>
+
+<script>
+    document.getElementById("id_user").style.display = 'none';
+</script>

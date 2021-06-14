@@ -1,0 +1,17 @@
+
+
+{% if request.user in post.saved.all %}
+<form action="{% url 'saved-post-page' post_id=post.pk value=1%}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="post_id" value={{post.pk}}>
+        <button type="submit" >unsave</button>
+
+</form>
+{% else %}
+<form action="{% url 'saved-post-page' post_id=post.pk value=0%}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="post_id" value={{post.pk}}>
+        <button type="submit" >save</button>
+
+</form>
+{% endif %}

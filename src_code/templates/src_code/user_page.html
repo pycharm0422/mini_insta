@@ -1,0 +1,52 @@
+<h1>User Page</h1>
+<br><br><br>
+
+<h2>{{user.user}}</h2>
+
+{% if request.user == user.user %}
+You are the owner of this account
+{% else %}
+    <a href="{% url 'message-page' receiver=user.user %}">message {{user.user}}</a>
+    {% if user.user in main_user.following.all %}
+    
+        <button><a href="{% url 'follow_unfollow-page' id_user=user.user.pk value='0'%}">Unfollow</a></button>
+    {% else %}
+        <button><a href="{% url 'follow_unfollow-page' id_user=user.user.pk value='1'%}">Follow</a></button>
+    {% endif %}
+
+{% endif %}
+
+
+<div class="followers">
+    <h2>Followers {{ user.followers.count }}</h2>
+    {% for fler in user.followers.all %}
+        <a href="{% url 'user-page' user_id=fler.pk %}">{{fler}}</a> <br>
+    {% endfor %}
+
+</div>
+
+<div class="following">
+    <h2>Following {{ user.following.count }}</h2>
+    {% for flwing in user.following.all %}
+        <a href="{% url 'user-page' user_id=flwing.pk %}">{{flwing}}</a> <br>
+    {% endfor %}
+
+</div>
+<br><br><br><br><br><br><br><br><br><br>
+{% for post in posts %}
+
+    {{post}} <br>
+
+{% endfor %}
+
+<br><br><br><br><br><br><b><br></b>
+<h2>Tags</h2>
+
+{% for tag in tags %}
+
+{{tag}} <br>
+{% endfor %}
+
+
+
+

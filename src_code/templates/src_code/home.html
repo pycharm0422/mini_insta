@@ -1,0 +1,13 @@
+
+
+<br><br><br><br>
+
+
+{% for post in posts %}
+
+    {{post.post}} <br>
+    {% include 'src_code/likes.html' %}
+    {% include 'src_code/saved.html' %}
+    
+
+{% endfor %}

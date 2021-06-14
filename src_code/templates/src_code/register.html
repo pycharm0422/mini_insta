@@ -1,0 +1,9 @@
+<h1>Register Page</h1>
+
+<form action="" method="post">
+    {% csrf_token %}
+    <fieldset>
+        {{form.as_p}}
+    </fieldset>
+        <button type="submit" >Submit</button>
+</form>
