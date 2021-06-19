@@ -19,12 +19,13 @@ class Post(models.Model):
 
 
 class Message(models.Model):
-    sender = models.ForeignKey(User, related_name='sender', on_delete=models.CASCADE)
+    # sender = models.ForeignKey(User, related_name='sender', on_delete=models.CASCADE)
+    sender = models.CharField(max_length=300, null=True, blank=True)
     receiver = models.ForeignKey(User, related_name='receiver', on_delete=models.CASCADE)
     message = models.TextField(null=True, blank=False)
     
     def __str__(self):
-        return self.sender.username + " has send message to " + self.receiver.username
+        return self.sender + " has send message to " + self.receiver.username
 
 class Room(models.Model):
     room_name = models.CharField(max_length=200, null=True)
@@ -52,11 +53,3 @@ class Comments(models.Model):
 
     def __str__(self):
         return self.user.username + " comment"
-
-
-
-    # def connection(self):
-    #     sere = []
-    #     sere.append(self.receiver)
-    #     sere.append(self.sender)
-    #     return sere

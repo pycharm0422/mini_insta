@@ -1,0 +1,15 @@
+
+
+<h1>Indivual Post Page</h1>
+
+<h2>{{post}}</h2>
+
+
+{% include 'src_code/comment.html' %}
+
+
+{% for comment in comments %}
+<b>{{comment.user}}</b> <br>
+{{comment.comment}} <br> <br>
+
+{% endfor %}

@@ -1,0 +1,11 @@
+
+
+<form action="{% url 'comment-page' %}" method="post">
+    {% csrf_token %}
+    <fieldset>
+        <input type="hidden" name="user_who_commented" value={{request.user.pk}}>
+        <input type="hidden" name="post" value={{post.id}}>
+        <textarea name="comment" id="comment" cols="30" rows="10"></textarea>
+    </fieldset>
+    <button type="submit" >Comment</button>
+</form>
