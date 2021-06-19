@@ -67,3 +67,41 @@ integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="ano
         })
     });
 </script>
+
+
+<script>
+    $( document ).ready(function() {
+
+        $('.saved-form').submit(function(e){
+            e.preventDefault()
+            
+            const post_id = $(this).attr('id')
+            
+            const likeText = $(`.save-btn${post_id}`).text()
+            const trim = $.trim(likeText)
+
+            const url = $(this).attr('action')
+                        
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: {
+                    'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),
+                    'post_id':post_id,
+                },
+                success: function(response) {
+                    if(trim === 'Save') {
+                        $(`.save-btn${post_id}`).text('Unsave')
+                    } else {
+                        $(`.save-btn${post_id}`).text('Save')
+                    }
+
+                },
+                error: function(response) {
+                    console.log('error', response)
+                }
+            })
+
+        })
+    });
+</script>

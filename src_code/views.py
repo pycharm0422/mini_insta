@@ -106,15 +106,16 @@ def comment(request):
     cmt.save()
     return redirect('individual-post-page', post_id)
 
-def savedPost(request, post_id, value):
+def savedPost(request):
     if request.method == 'POST':
-        if value == 0:
-            post = Post.objects.get(pk=post_id)
-            post.saved.add(request.user)
-        if value == 1:
-            post = Post.objects.get(pk=post_id)
+        post_id = request.POST.get('post_id')
+        post = Post.objects.get(pk=post_id)
+        if request.user in post.saved.all():
             post.saved.remove(request.user)
-        return redirect('home-page')
+        else:
+            post.saved.add(request.user)
+    # return JsonResponse({"post":post,})
+    return redirect('home-page')
 
 
 def userPage(request, user_id):
