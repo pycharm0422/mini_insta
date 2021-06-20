@@ -1,0 +1,8 @@
+
+<div class="followers">
+    <h2>Followers </h2>
+    {% for fler in detail.followers.all %}
+        <a href="{% url 'user-page' user_id=fler.pk %}">{{fler}}</a> <br>
+    {% endfor %}
+
+</div>

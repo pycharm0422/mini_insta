@@ -1,10 +1,59 @@
-<h1>User Page</h1>
-<br><br><br>
+{% extends 'src_code/basics/base.html' %}
 
-<h2>{{user.user}}</h2>
+{% block content %}
+
+
+<section class="text-gray-400 bg-gray-900 body-font">
+    <div class="container px-5 py-24 mx-auto flex flex-wrap">
+      <div class="flex flex-wrap -mx-4 mt-auto mb-auto lg:w-1/2 sm:w-2/3 content-start sm:pr-10">
+        <div class="w-full sm:p-4 px-4 mb-6">
+          <h1 class="title-font font-medium text-3xl mb-2 text-white">{{user.user}}</h1>
+          <div class="leading-relaxed">Pour-over craft beer pug drinking vinegar live-edge gastropub, keytar neutra sustainable fingerstache kickstarter.</div>
+        </div>
+        <div class="p-4 sm:w-1/2 lg:w-1/4 w-1/2">
+          <h2 class="title-font font-medium text-3xl text-white">99</h2>
+          <p class="leading-relaxed">POSTS</p>
+        </div>
+
+        <a class=" hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-opacity-50" href="{% url 'followers-page' pk_of_users=user.id %}"><div class="p-4 sm:w-1/2 lg:w-1/4 w-1/2 ">
+            {% if user.followers.count < 10 %}
+            <h2 class="title-font font-medium text-3xl text-white">0{{ user.followers.count }}</h2>
+            {% else %}
+            <h2 class="title-font font-medium text-3xl text-white">{{ user.followers.count }}</h2>
+            {% endif %}
+          <p class="leading-relaxed">FOLLOWER</p>
+        </div></a>
+
+        <a class=" hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50" href="{% url 'following-page' pk_of_users=user.id %}"><div class="p-4 sm:w-1/2 lg:w-1/4 w-1/2 ">
+            {% if user.following.count < 10 %}
+            <h2 class="title-font font-medium text-3xl text-white">0{{ user.following.count }}</h2>
+            {% else %}
+            <h2 class="title-font font-medium text-3xl text-white">{{ user.following.count }}</h2>
+            {% endif %}
+          <p class="leading-relaxed">FOLLOWING</p>
+        </div></a>
+
+        <div class="p-4 sm:w-1/2 lg:w-1/4 w-1/2">
+          <h2 class="title-font font-medium text-3xl text-white">4</h2>
+          <p class="leading-relaxed">Products</p>
+        </div>
+      </div>
+      <div class="lg:w-1/2 sm:w-1/3 w-full rounded-lg overflow-hidden mt-6 sm:mt-0">
+        <img class="object-cover object-center w-full h-full" src="https://images.unsplash.com/photo-1524660988542-c440de9c0fde?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxNXx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="stats">
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+
+
+
+
 
 {% if request.user == user.user %}
-You are the owner of this account
 {% else %}
     <a href="{% url 'message-page' receiver=user.user %}">message {{user.user}}</a>
     {% if user.user in main_user.following.all %}
@@ -17,27 +66,34 @@ You are the owner of this account
 {% endif %}
 
 
-<div class="followers">
-    <h2>Followers {{ user.followers.count }}</h2>
-    {% for fler in user.followers.all %}
-        <a href="{% url 'user-page' user_id=fler.pk %}">{{fler}}</a> <br>
-    {% endfor %}
 
-</div>
+<section class="text-gray-400 bg-gray-900 body-font">
+    <div class="container px-5 py-24 mx-auto">
+      <div class="flex flex-col text-center w-full mb-20">
+        <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-white">Master Cleanse Reliac Heirloom</h1>
+       
+      </div>
+      <div class="flex flex-wrap -m-4">
+        {% for post in posts %}
 
-<div class="following">
-    <h2>Following {{ user.following.count }}</h2>
-    {% for flwing in user.following.all %}
-        <a href="{% url 'user-page' user_id=flwing.pk %}">{{flwing}}</a> <br>
-    {% endfor %}
+        <div class="lg:w-1/3 sm:w-1/2 p-4">
+          <div class="flex relative">
+            <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="https://images.unsplash.com/photo-1527822984742-e14743fc7f60?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60">
+            <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-800 bg-gray-900 opacity-0 hover:opacity-100">
+              <h2 class="tracking-widest text-sm title-font font-medium text-indigo-400 mb-1"> {{post}} <br>
+              </h2>
+              <h1 class="title-font text-lg font-medium text-white mb-3">{{post.likes.count}}</h1>
+              <p class="leading-relaxed">Lorem ipsum dolor sit amet consime officia autem atque, sint voluptas facilis et repellendus nam minus doloribus? Numquam quibusdam accusantium totam beatae.</p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
 
-</div>
-<br><br><br><br><br><br><br><br><br><br>
-{% for post in posts %}
+      </div>
+    </div>
+  </section>
 
-    {{post}} <br>
 
-{% endfor %}
 
 <br><br><br><br><br><br><b><br></b>
 <h2>Tags</h2>
@@ -50,3 +106,9 @@ You are the owner of this account
 
 
 
+
+
+
+
+
+{% endblock content %}

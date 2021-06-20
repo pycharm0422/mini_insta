@@ -1,28 +1,47 @@
 
 
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"
-integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+{% extends 'src_code/basics/base.html' %}
+{% block content %}
 
+<section class="text-gray-400 bg-gray-900 body-font">
+    {% for post in posts %}
+    <div class="container mx-auto flex px-5 py-24 items-center justify-center flex-col">
+        <!-- <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-white"> {{post.post}}</h1> -->
+        <img class="lg:w-2/6 md:w-3/6 w-5/6 mb-10 object-cover object-center rounded" alt="hero" src="https://images.unsplash.com/photo-1523734650021-75837a627245?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw1fHx8ZW58MHx8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60">
+      <div class="text-center lg:w-2/3 w-full">
+        <p class="leading-relaxed mb-8"><a href="{% url 'individual-post-page' post_id=post.id %}">{{post.post}}</a> </p>
+        <div class="flex justify-center">
+            {% include 'src_code/likes.html' %}
+            {% include 'src_code/saved.html' %}
 
-<div class="container">
+       
+        </div>
+      </div>
+    </div>
+    {% endfor %}
 
-<br><br><br><br>
-
-
-{% for post in posts %}
-
-    {{post.post}} <br>
-    {% include 'src_code/likes.html' %}
-    {% include 'src_code/saved.html' %}
-    <a href="{% url 'individual-post-page' post_id=post.id %}">Read full post</a>    
-
-{% endfor %}
-
-
-
-
-</div>
-
+  </section>
+  <section class="text-gray-400 bg-gray-900 body-font overflow-hidden">
+    <div class="container px-5 py-24 mx-auto">
+      <div class="lg:w-4/5 mx-auto flex flex-wrap">
+        <div class="lg:w-1/2 w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0">
+          <h1 class="text-white text-3xl title-font font-medium mb-4">Animated Night Hill Illustrations</h1>
+       
+          <p class="leading-relaxed mb-4">Fam locavore kickstarter distillery. Mixtape chillwave tumeric 
+          <div class="flex">
+            <span class="title-font font-medium text-2xl text-white">$58.00</span>
+            <button class="flex ml-auto text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded">Button</button>
+            <button class="rounded-full w-10 h-10 bg-gray-800 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
+              <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <img alt="ecommerce" class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded" src="https://dummyimage.com/400x400">
+      </div>
+    </div>
+  </section>
 
 <script>
     $( document ).ready(function() {
@@ -105,3 +124,4 @@ integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="ano
         })
     });
 </script>
+{% endblock content %}

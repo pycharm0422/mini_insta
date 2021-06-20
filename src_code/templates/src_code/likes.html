@@ -1,41 +1,21 @@
-
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"
-integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-
-
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-
-
-
 <form action="{% url 'likes-count' %}" class='like-form' id='{{post.id}}'>
     {% csrf_token %}
     <input type="hidden" name="post_id" value={{post.id}}>
-    
-        <button type="submit" class="ui button like-btn{{post.id}}">
+    <div class="flex">
+        <span class="title-font font-medium text-2xl text-white like-count{{post.id}}">{{post.likes.count}}</span>
+
+        <button type="submit"
+            class="ml-4 inline-flex text-gray-100 bg-pink-800 border-0 py-2 px-6 focus:outline-none hover:bg-pink-700 hover:text-white rounded text-lg ui button like-btn{{post.id}}">
             {% if request.user not in post.likes.all %}
-                Like
+            Like 
             {% else %}
-                Unlike
+            Unlike
             {% endif %}
         </button>
-        <div class="ui grid">
-            <div class="column">
-                <div class="like-count{{post.id}}"> {{post.likes.count}} </div>
-            </div>
-        </div>
+     </div>
+
+
+
 </form>
-
-
-
-
-
-
-
-
-
 
 

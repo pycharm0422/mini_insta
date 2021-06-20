@@ -1,0 +1,7 @@
+
+<div class="following">
+    <h2>Following </h2>
+    {% for flwing in detail.following.all %}
+        <a href="{% url 'user-page' user_id=flwing.pk %}">{{flwing}}</a> <br>
+    {% endfor %}
+</div>

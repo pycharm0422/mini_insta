@@ -118,6 +118,26 @@ def savedPost(request):
     return redirect('home-page')
 
 
+def followers(request, pk_of_users):
+    user_is = User.objects.get(id=pk_of_users)
+    detail = Detail.objects.get(pk=pk_of_users)    
+    context = {
+        'detail':detail,
+    }
+    
+    return render(request, 'src_code/followers.html', context)
+
+
+def following(request, pk_of_users):
+    user_is = User.objects.get(id=pk_of_users)
+    detail = Detail.objects.get(pk=pk_of_users)
+  
+    context = {
+        'detail':detail,
+    }
+
+    return render(request, 'src_code/following.html', context)
+
 def userPage(request, user_id):
     print(user_id)
     

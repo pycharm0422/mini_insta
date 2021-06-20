@@ -4,16 +4,14 @@
     {% csrf_token %}
     <input type="hidden" name="post_id" value={{post.pk}}>
     
-        <button type="submit" class="ui button save-btn{{post.id}}">
+        <button type="submit" class="ml-4 inline-flex text-gray-100 bg-green-800 border-0 py-2 px-6 focus:outline-none hover:bg-green-700 hover:text-white rounded text-lg ui button save-btn{{post.id}}">
             {% if request.user not in post.saved.all %}
-                Save
-            {% else %}
-                Unsave
-            {% endif %}
+                    Save
+                {% else %}
+                    Unsave
+                {% endif %}
         </button>
+        
        
 </form>
-
-
-
 

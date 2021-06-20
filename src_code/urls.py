@@ -23,6 +23,8 @@ urlpatterns = [
     path('getMessages/<str:receiver>/', views.getMessages, name='getMessages'),
     path('individual-post/<int:post_id>/', views.individualPost, name='individual-post-page'),
     path('comment/', views.comment, name='comment-page'),
+    path('followers/<int:pk_of_users>/', views.followers, name='followers-page'),
+    path('following/<int:pk_of_users>/', views.following, name='following-page'),
 ]
 
 if settings.DEBUG:
