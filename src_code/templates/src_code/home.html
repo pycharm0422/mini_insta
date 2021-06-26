@@ -1,5 +1,3 @@
-
-
 {% extends 'src_code/basics/base.html' %}
 {% block content %}
 
@@ -7,68 +5,55 @@
     {% for post in posts %}
     <div class="container mx-auto flex px-5 py-24 items-center justify-center flex-col">
         <!-- <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-white"> {{post.post}}</h1> -->
-        <img class="lg:w-2/6 md:w-3/6 w-5/6 mb-10 object-cover object-center rounded" alt="hero" src="https://images.unsplash.com/photo-1523734650021-75837a627245?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw1fHx8ZW58MHx8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60">
-      <div class="text-center lg:w-2/3 w-full">
-        <p class="leading-relaxed mb-8"><a href="{% url 'individual-post-page' post_id=post.id %}">{{post.post}}</a> </p>
-        <div class="flex justify-center">
-            {% include 'src_code/likes.html' %}
-            {% include 'src_code/saved.html' %}
+        <img class="lg:w-2/6 md:w-3/6 w-5/6 mb-10 object-cover object-center rounded" alt="hero"
+            src="{{post.image.url}}">
+        <div class="text-center lg:w-2/3 w-full">
+            <p class="leading-relaxed mb-8"><a href="{% url 'individual-post-page' post_id=post.id %}">{{post.post}}</a>
+            </p>
+            <div class="flex justify-center">
+                {% include 'src_code/likes.html' %}
+                {% include 'src_code/saved.html' %}
+                <button type="submit"
+                    class="ml-4 inline-flex text-gray-100 bg-blue-800 border-0 py-2 px-6 focus:outline-none hover:bg-blue-700 hover:text-white rounded text-lg ui button{{post.id}}">
+                    <a href="{% url 'individual-post-page' post_id=post.id %}">Comment </a>
+                </button>
 
-       
+
+
+            </div>
         </div>
-      </div>
     </div>
     {% endfor %}
 
-  </section>
-  <section class="text-gray-400 bg-gray-900 body-font overflow-hidden">
-    <div class="container px-5 py-24 mx-auto">
-      <div class="lg:w-4/5 mx-auto flex flex-wrap">
-        <div class="lg:w-1/2 w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0">
-          <h1 class="text-white text-3xl title-font font-medium mb-4">Animated Night Hill Illustrations</h1>
-       
-          <p class="leading-relaxed mb-4">Fam locavore kickstarter distillery. Mixtape chillwave tumeric 
-          <div class="flex">
-            <span class="title-font font-medium text-2xl text-white">$58.00</span>
-            <button class="flex ml-auto text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded">Button</button>
-            <button class="rounded-full w-10 h-10 bg-gray-800 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
-              <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
-                <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
-              </svg>
-            </button>
-          </div>
-        </div>
-        <img alt="ecommerce" class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded" src="https://dummyimage.com/400x400">
-      </div>
-    </div>
-  </section>
+
+</section>
 
 <script>
-    $( document ).ready(function() {
+    $(document).ready(function () {
 
-        $('.like-form').submit(function(e){
+        $('.like-form').submit(function (e) {
             e.preventDefault()
-            
+
             const post_id = $(this).attr('id')
-            
+
             const likeText = $(`.like-btn${post_id}`).text()
             const trim = $.trim(likeText)
 
             const url = $(this).attr('action')
-            
+
             let res;
             const likes = $(`.like-count${post_id}`).text()
             const trimCount = parseInt(likes)
-            
+
             $.ajax({
                 type: 'POST',
                 url: url,
                 data: {
                     'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),
-                    'post_id':post_id,
+                    'post_id': post_id,
                 },
-                success: function(response) {
-                    if(trim === 'Unlike') {
+                success: function (response) {
+                    if (trim === 'Unlike') {
                         $(`.like-btn${post_id}`).text('Like')
                         res = trimCount - 1
                     } else {
@@ -78,7 +63,7 @@
 
                     $(`.like-count${post_id}`).text(res)
                 },
-                error: function(response) {
+                error: function (response) {
                     console.log('error', response)
                 }
             })
@@ -89,34 +74,34 @@
 
 
 <script>
-    $( document ).ready(function() {
+    $(document).ready(function () {
 
-        $('.saved-form').submit(function(e){
+        $('.saved-form').submit(function (e) {
             e.preventDefault()
-            
+
             const post_id = $(this).attr('id')
-            
+
             const likeText = $(`.save-btn${post_id}`).text()
             const trim = $.trim(likeText)
 
             const url = $(this).attr('action')
-                        
+
             $.ajax({
                 type: 'POST',
                 url: url,
                 data: {
                     'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),
-                    'post_id':post_id,
+                    'post_id': post_id,
                 },
-                success: function(response) {
-                    if(trim === 'Save') {
+                success: function (response) {
+                    if (trim === 'Save') {
                         $(`.save-btn${post_id}`).text('Unsave')
                     } else {
                         $(`.save-btn${post_id}`).text('Save')
                     }
 
                 },
-                error: function(response) {
+                error: function (response) {
                     console.log('error', response)
                 }
             })

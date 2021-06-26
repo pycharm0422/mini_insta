@@ -1,8 +1,43 @@
+{% extends 'src_code/basics/base.html' %}
 
-<div class="followers">
-    <h2>Followers </h2>
-    {% for fler in detail.followers.all %}
-        <a href="{% url 'user-page' user_id=fler.pk %}">{{fler}}</a> <br>
-    {% endfor %}
+{% block content %}
+<section class="text-gray-400 bg-gray-900 body-font">
+    <div class="container px-5 py-24 mx-auto">
+      <div class="flex flex-col text-center w-full mb-20">
+        <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-white">Followers</h1>
+        <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical gentrify, subway tile poke farm-to-table. Franzen you probably haven't heard of them.</p>
+      </div>
+      <div class="flex flex-wrap -m-2">
+        {% for key,value in d %}
 
-</div>
+        <div class="p-2 lg:w-1/3 md:w-1/2 w-full">
+          <div class="h-full flex items-center border-gray-800 border p-4 rounded-lg">
+            <img alt="team" class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src="{{key.profile_pic.url}}">
+            <a href="{% url 'user-page' user_id=value.pk %}"><div class="flex-grow">
+              <h2 class="text-white title-font font-medium">{{key}}</h2>
+              <p class="text-gray-600">{{value}}</p>
+            </div></a>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <br><br><br><br><br><br><br><br><br>
+  </section>
+{% endblock content %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

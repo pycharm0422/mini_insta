@@ -88,10 +88,12 @@ def getMessages(request, receiver):
 def individualPost(request, post_id):
     post = Post.objects.get(pk=post_id)
     comments = Comments.objects.filter(post_id=post.id)
+    user = Detail.objects.get(user=request.user)
 
     context = {
         'post':post,
         'comments':comments,
+        'user':user,
     }
     return render(request, 'src_code/individual_post.html', context)
 
@@ -118,22 +120,34 @@ def savedPost(request):
     return redirect('home-page')
 
 
-def followers(request, pk_of_users):
-    user_is = User.objects.get(id=pk_of_users)
-    detail = Detail.objects.get(pk=pk_of_users)    
-    context = {
-        'detail':detail,
-    }
-    
-    return render(request, 'src_code/followers.html', context)
-
-
-def following(request, pk_of_users):
-    user_is = User.objects.get(id=pk_of_users)
+def followers(request, pk_of_users, detail_of_user):
+    d = {}
+    user_is = User.objects.get(id=detail_of_user)
     detail = Detail.objects.get(pk=pk_of_users)
+    for item in detail.followers.all():
+        user = Detail.objects.get(user=item)
+        d[user] = item
+    
   
     context = {
         'detail':detail,
+        'd':d.items(),
+    }
+    return render(request, 'src_code/followers.html', context)
+
+
+def following(request, pk_of_users, detail_of_user):
+    d = {}
+    user_is = User.objects.get(id=detail_of_user)
+    detail = Detail.objects.get(pk=pk_of_users)
+    for item in detail.following.all():
+        user = Detail.objects.get(user=item)
+        d[user] = item
+    
+  
+    context = {
+        'detail':detail,
+        'd':d.items(),
     }
 
     return render(request, 'src_code/following.html', context)
