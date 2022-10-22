@@ -228,16 +228,6 @@ def likes(request):
     # return redirect('posts:main-post-view')
 
 
-
-
-
-
-
-
-
-
-
-
 def addPost(request):
 
     if request.method == 'POST':
