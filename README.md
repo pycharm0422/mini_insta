@@ -20,7 +20,6 @@
 <img src="https://github.com/pycharm0422/mini_insta/blob/main/mini_insta_screenshot/Screenshot%20from%202022-10-23%2002-01-09.png" width="400" height="200">
 <img src="https://github.com/pycharm0422/mini_insta/blob/main/mini_insta_screenshot/Screenshot%20from%202022-10-23%2002-03-29.png" width="400" height="200">
 <img src="https://github.com/pycharm0422/mini_insta/blob/main/mini_insta_screenshot/Screenshot%20from%202022-10-23%2002-03-54.png" width="400" height="200">
-<img src="" width="400" height="200">
 
 
 
