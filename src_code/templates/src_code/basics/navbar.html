@@ -7,21 +7,19 @@
         <span class="ml-3 text-xl">Tailblocks</span>
       </a>
       <nav class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
-        <a href="" class="mr-5 hover:text-white">First Link</a>
+        <a href="" class="mr-5 hover:text-white">First Link {{request.user.pk}}</a>
         <a href="" class="mr-5 hover:text-white">Second Link</a>
         {%  if request.user.is_authenticated %}
-        <a href="" class="mr-5 hover:text-white">LOGOUT</a>
+        
         {% else %}
-        <a href="" class="mr-5 hover:text-white">REGISTER</a>
-        <a href="" class="mr-5 hover:text-white">LOGIN</a>
+        <a href="{% url 'register-page' %}" class="mr-5 hover:text-white">REGISTER</a>
+        <a href="{% url 'login-page' %}" class="mr-5 hover:text-white">LOGIN</a>
         {% endif %}
       </nav>
       {%  if request.user.is_authenticated %}
-      <button href="" class="inline-flex items-center bg-gray-800 border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded text-base mt-4 md:mt-0">My Account
-       
-          <path d="M5 12h14M12 5l7 7-7 7"></path>
-        </svg>
-      </button>
+      <a href="{% url 'user-page' user_id=request.user.pk%}" class="inline-flex items-center bg-gray-800 border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded text-base mt-4 md:mt-0">My Account
+      </a> 
+      <a href="{% url 'logout-page' %}" class="ml-5 hover:text-white">LOGOUT</a>
       {% endif %}
     </div>
   </header>

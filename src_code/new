@@ -1,0 +1,73 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#
+# Complete the 'jennysSubtrees' function below.
+#
+# The function is expected to return an INTEGER.
+# The function accepts following parameters:
+#  1. INTEGER n
+#  2. INTEGER r
+#  3. 2D_INTEGER_ARRAY edges
+#
+
+def jennysSubtrees(n, r, edges):
+    arr = []
+    cntCounted = []
+    d = {}
+    for i in edges:
+        d[i[0]] = []
+        d[i[1]] = []
+    for i in edges:
+        val1 = i[0]
+        val2 = i[1]
+        d[val1].append(val2)
+        d[val2].append(val1)
+    print(d)
+    visit = []
+    
+    
+    for i in d.keys():
+        stk = []
+        visited = []
+        cnt = -1
+        stk.append([i,0])
+        while stk:
+            val = stk.pop(0)
+            visited.append(val[0])
+            cnt += 1
+            if val[1] < r:
+                for item in d[val[0]]:
+                    if item not in visited:
+                        stk.append([item,val[1]+1])
+        visited.clear()
+        print("cnt ", cnt)
+        if(cnt not in visit):
+            visit.append(cnt)
+    print(visit)
+    return len(visit)
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    first_multiple_input = input().rstrip().split()
+
+    n = int(first_multiple_input[0])
+
+    r = int(first_multiple_input[1])
+
+    edges = []
+
+    for _ in range(n - 1):
+        edges.append(list(map(int, input().rstrip().split())))
+
+    result = jennysSubtrees(n, r, edges)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()

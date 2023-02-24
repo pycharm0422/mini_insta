@@ -4,6 +4,15 @@
 <section class="text-gray-400 bg-gray-900 body-font">
     {% for post in posts %}
     <div class="container mx-auto flex px-5 py-24 items-center justify-center flex-col">
+     
+              <div class="p-8 md:w-2/5 flex flex-col items-start">
+                <a class="inline-flex items-center">
+                  <img alt="blog" src="{{request.user.profile_pic}}" class="w-12 h-12 rounded-full flex-shrink-0 object-cover object-center">
+                  <span class="flex-grow flex flex-col pl-4">
+                    <span class="title-font font-medium text-white">{{post.user}}</span>
+                  </span>
+                </a>
+              </div>
         <!-- <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-white"> {{post.post}}</h1> -->
         <img class="lg:w-2/6 md:w-3/6 w-5/6 mb-10 object-cover object-center rounded" alt="hero"
             src="{{post.image.url}}">
